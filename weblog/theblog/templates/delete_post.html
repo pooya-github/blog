@@ -1,0 +1,18 @@
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        <h1>Delete Post</h1>
+        <br/><br/>
+        <h3>Delete: {{ post.topic }}</h3>
+        <br/>
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-secondary">Delete Post!</button>
+        </form>
+        </ul>
+    {% else %}
+      You should be the post's author to delete this post.
+    {% endif %}
+{% else %}
+You should login first.
+
+{% endif %}

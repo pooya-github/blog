@@ -1,0 +1,30 @@
+<h1>Posts</h1>
+{% if user.is_authenticated %}
+<p><a href="{% url 'add_post' %}">Add Post</a></p>
+<p><a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+<p><a href="{% url 'register' %}">Register</a></p>
+<p><a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+
+
+
+
+<ul>
+{% for post in object_list %}
+   <li><a href="{% url 'article-detail' post.pk %}"> {{ post.topic }}</a>
+     - {{ post.author }} - 
+     {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <a href="{% url 'update_post' post.pk %}">
+                Edit</a>
+
+            <a href="{% url 'delete_post' post.pk %}">
+                Delete</a>
+        {% endif %}
+        <br/>
+     {% endif %}
+    {{ post.message|slice:":200" }} </li>
+
+{% endfor %}
+</ul>

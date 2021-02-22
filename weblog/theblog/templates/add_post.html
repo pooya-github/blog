@@ -1,0 +1,13 @@
+{% if user.is_authenticated %}
+<h1>Add Post</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-secondary">Post</button>
+</form>
+</ul>
+{% else %}
+You should login first.
+
+{% endif %}
